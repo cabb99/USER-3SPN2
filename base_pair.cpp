@@ -84,28 +84,47 @@ void BasePair::assign(int *indices, int *site_type, double ***param, double ***a
     typf = site_type[5];
 
     // Get relevant angles, sigm, and epsilon
-    if ((typb != EMPTY) && (typd != EMPTY))
-      ateq[0] = angle[0][typb][typd];  // Angle between ba and dc
-    if ((typb != EMPTY) && (type != EMPTY))
+    if ((typb != EMPTY) && (typd != EMPTY)) {
+      ateq[0] = angle[0][typb][typd];// Angle between ba and dc
+    } else {
+      ateq[0]=EMPTY;
+    }
+
+    if ((typb != EMPTY) && (type != EMPTY)) {
       ateq[1] = angle[1][typb][type]; // Angle between ba and be
-    if ((typb != EMPTY) && (typf != EMPTY))
+    } else {
+      ateq[1]=EMPTY;
+    }
+
+    if ((typb != EMPTY) && (typf != EMPTY)) {
       ateq[2] = angle[2][typd][typf]; // Angle between dc and df
-    if ((typb != EMPTY) && (typd != EMPTY))
+    } else {
+      ateq[2]=EMPTY;
+    }
+
+    if ((typb != EMPTY) && (typd != EMPTY)) {
       ateq[3] = angle[3][typb][typd]; // Torsion angle created by a-b-d-c
-    if ((typb != EMPTY) && (typd != EMPTY))
+    } else {
+      ateq[3]=EMPTY;
+    }
+
+    if ((typb != EMPTY) && (typd != EMPTY)) {
       ateq[4] = angle[4][typb][typd]; // Angle between  a-b-d
-    if ((typb != EMPTY) && (typd != EMPTY))
+    } else {
+      ateq[4]=EMPTY;
+    }
+
+    if ((typb != EMPTY) && (typd != EMPTY)){
       ateq[5] = angle[5][typb][typd]; // Angle between  b-d-c
-    for (i = 0; i < 5; i++)
-    {
-        ////printf("angle %d = %lf ",i+1,ateq[i]);
+    } else {
+      ateq[5]=EMPTY;
     }
 
     // Checking to make sure there aren't any issues
-    for (i = 0; i < SIX; i++)
-    {
-       // if (ateq[i] == EMPTY) error->all(FLERR,"EMPTY value for equilibrium angle %d",i); // Throw error
-    }
+//    for (i = 0; i < SIX; i++)
+//    {
+//        if (ateq[i] == EMPTY) error->all(FLERR,"EMPTY value for equilibrium angle %d",i); // Throw error
+//    }
 
     // Storing the sigmas that we need
     j = 0;  // First cross-stacking interaction
@@ -467,7 +486,7 @@ double BasePair::cross_stacking(int c,  double**f)
         }
     }
 
-    // Calculate the other cross stacking interction
+    // Calculate the other cross stacking interaction
     if (c == 1)
     {
         if ( (dtha[0] >= -MY_PI/(range[ibp]*2.0)) && (dtha[0] <= MY_PI/(range[ibp]*2.0)))

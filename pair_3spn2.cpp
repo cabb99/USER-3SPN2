@@ -230,6 +230,7 @@ void Pair3spn2::compute(int eflag, int vflag)
                     if (!(bp_array[myitype-1][myjtype-1] % 2))
                     {
                         ecrossstack = basepair->cross_stacking(0,f);  // Interaction 1
+                        //std::cout<<  "CrossStackingEnergy Pair " << steb << " " << sted << " "<< stee << " CrossStacking 1 Energy " << basepair->cross_stacking(0,f) << std::endl;
                     }
 
                     // Calcuate second cross stacking interaction if site b is
@@ -237,6 +238,7 @@ void Pair3spn2::compute(int eflag, int vflag)
                     if (!(bp_array[myitype-1][myjtype-1] % 3))
                     {
                         ecrossstack += basepair->cross_stacking(1,f);  // Interaction 2
+                        //std::cout<<  "CrossStackingEnergy Pair " << steb << " " << sted << " "<< stef << " CrossStacking 2 Energy " << basepair->cross_stacking(1,f) << std::endl;
                     }
                     
                     // Calculating the base pair interaction
@@ -247,7 +249,7 @@ void Pair3spn2::compute(int eflag, int vflag)
                     if ((ebasepair <  -bp_cutoff * basepair->epsi[2]) && (molecule[i] != molecule[j])) nbps_inter++;
 
                     //Calculate complementary crosstacking interaction
-
+                    //TODO Move this calculation to basepair.cpp to make the calculation more efficient
                     steg = sted + 3;
                     steh = steb - 3;
                     stea = steb - 1;
@@ -296,6 +298,7 @@ void Pair3spn2::compute(int eflag, int vflag)
                     if (!(bp_array[myitype-1][myjtype-1] % 2))
                     {
                         ecrossstack += basepair->cross_stacking(0,f);  // Interaction 1
+                        //std::cout<<  "CrossStackingEnergy Pair " << steb << " " << sted << " "<< steh << " CrossStacking 3 Energy " << basepair->cross_stacking(0,f) << std::endl;
                     }
 
                     // Calcuate second cross stacking interaction if site b is
@@ -303,6 +306,7 @@ void Pair3spn2::compute(int eflag, int vflag)
                     if (!(bp_array[myitype-1][myjtype-1] % 3))
                     {
                         ecrossstack += basepair->cross_stacking(1,f);  // Interaction 2
+                        //std::cout<<  "CrossStackingEnergy Pair " << steb << " " << sted << " "<< steg << " CrossStacking 4 Energy " << basepair->cross_stacking(1,f) << std::endl;
                     }
                 }
                 else
